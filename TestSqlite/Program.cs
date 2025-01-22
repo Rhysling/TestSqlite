@@ -1,32 +1,18 @@
 ﻿
 using TestSqlite.ADO;
+using TestSqlite.NpocoDemo;
 
 string dbPath = @"D:\UserData\Documents\AppTest\TestSqlite\TestSqlite\db\hello.db";
 
-var demo = new DemoADO(dbPath);
-demo.Create();
+//Ado.RunAdo(dbPath);
 
-start:
-int com = AdoMenu.Run();
+var db = new DemoNpoco(dbPath);
+var pl = db.GetPlants();
 
-switch (com)
+foreach (var p in pl)
 {
-	case 1:
-		demo.Add();
-		break;
-	case 2:
-		demo.FindById();
-		break;
-	case 3:
-		demo.ListAll();
-		break;
-	case 9:
-		goto end;
+	Console.WriteLine($"{p.Genus} {p.Species}");
 }
-goto start;
 
-end:
 Console.WriteLine("Done.");
 Console.ReadKey();
-
-
