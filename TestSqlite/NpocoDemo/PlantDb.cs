@@ -1,13 +1,7 @@
 ﻿namespace TestSqlite.NpocoDemo
 {
-	public class PlantDb : RepositoryBase
+	public class PlantDb(string connStr) : RepositoryBase(connStr)
 	{
-		public PlantDb(string connStr)
-			: base(connStr)
-		{
-		
-		}
-
 		public List<Plant> All()
 		{
 			return db.Fetch<Plant>("WHERE (IsDeleted = 0) ORDER BY Genus, Species");
